@@ -1,0 +1,41 @@
+Table Classes {
+  id int [pk]
+  name varchar
+  teacher_id int
+}
+
+Table Lessons {
+  id int [pk]
+  start_time time
+  end_time time
+  teacher_id int
+  subject_id int
+}
+
+Table Pupils {
+  id int [pk]
+  first_name varchar
+  last_name varchar
+  age tinyint [null]
+  class_id int
+  current_lesson_id int [null]
+}
+
+Table Subjects {
+  id int [pk]
+  name varchar
+}
+
+Table Teachers {
+  id int [pk]
+  first_name varchar
+  last_name varchar
+  age tinyint [null]
+  salary float
+}
+
+Ref: Classes.teacher_id - Teachers.id // one-to-one
+Ref: Lessons.teacher_id - Teachers.id // one-to-one
+Ref: Lessons.subject_id - Subjects.id // one-to-one
+Ref: Pupils.current_lesson_id > Lessons.id // one-to-many
+Ref: Pupils.class_id > Classes.id // one-to-many
